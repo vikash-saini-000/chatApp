@@ -86,7 +86,9 @@ const Sidebar = () => {
             }}
           >
             <img
-              src={user ? user.profilePic : assests.avatar_icon}
+              src={
+                user.profilePic==="" ? assests.avatar_icon : user.profilePic
+              }                                                      //src={user ? user.profilePic : assests.avatar}
               className='w-[35px] aspect-[1/1] rounded-full'
               alt='profile'
             />
