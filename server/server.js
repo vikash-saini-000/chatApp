@@ -18,11 +18,13 @@ import { Server } from "socket.io" ;
 // create express app and http server
 const app = express();
 const server = http.createServer(app);
-let PORT=process.env.PORT || 5000;;
+if(process.env.NODE_ENV!=="production"){
+    let PORT=process.env.PORT || 5000;;
 
-server.listen(PORT,(req,res)=>{
-    console.log(`Server is running on port ${PORT}`);
-});
+    server.listen(PORT,(req,res)=>{
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
 
 //initialize socket io server
 export const io = new Server(server,{
@@ -67,6 +69,9 @@ await connectDB();
 app.use('/api/auth', userRouter);
 //message routes
 app.use('/api/messages', messageRouter);
+
+//expoort server.js for vercel
+export default server;
 
 
 
